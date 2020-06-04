@@ -37,7 +37,7 @@ Usage
   >>> calculate_distance(line, Unit.meters)
   10979.098283583924
 
-Note: You need to install python-geojson_ first or you can use create GeoJSON as python dict:
+Note: You need to install python-geojson_ first or you can define GeoJSON as python dict:
 
 .. _python-geojson: https://github.com/jazzband/geojson
 
