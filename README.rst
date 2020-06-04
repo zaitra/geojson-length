@@ -7,7 +7,7 @@ geojson-length
         :target: https://pypi.python.org/pypi/geojson-length
 
 .. image:: https://img.shields.io/travis/zaitra/geojson-length.svg
-        :target: https://travis-ci.com/zaitra/geojson-length
+        :target: https://travis-ci.org/zaitra/geojson-length
 
 
 Calculate the length of a GeoJSON LineString or MultiLineString
