@@ -14,7 +14,6 @@ Calculate the length of a GeoJSON LineString or MultiLineString
 
 
 * Free software: MIT license
-* Documentation: https://geojson-length.readthedocs.io.
 
 
 Installation
