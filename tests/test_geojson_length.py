@@ -28,6 +28,24 @@ def geojson_santiago_bernabeu():
         },
     }
 
+@pytest.fixture
+def geojson_santiago_bernabeu_w_alt():
+    """
+    Santiago Bernabéu Stadium has 105m
+    """
+    #
+    return {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [-3.688431680202484, 40.453537706073185, 698.0],
+                [-3.6885067820549016, 40.45259884887462, 698.0],
+            ],
+        },
+    }
+
 
 @pytest.fixture
 def geojson_wenceslas_square():
@@ -63,6 +81,12 @@ def test_length_sb(geojson_santiago_bernabeu):
     assert calculate_distance(
         geojson_santiago_bernabeu, unit=Unit.yards
     ) == pytest.approx(114.51, rel=1e-1)
+
+
+def test_length_sb(geojson_santiago_bernabeu_w_alt):
+    assert calculate_distance(
+        geojson_santiago_bernabeu_w_alt, unit=Unit.meters
+    ) == pytest.approx(104.71, rel=1e-1)
 
 
 def test_length_ws(geojson_wenceslas_square):
