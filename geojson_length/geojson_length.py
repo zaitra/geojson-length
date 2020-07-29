@@ -24,8 +24,8 @@ def distance_between_two_points(
     """
 
     # GeoPy needs lat, lon
-    point1 = tuple(reversed(point1[0:2]))
-    point2 = tuple(reversed(point2[0:2]))
+    point1 = tuple(reversed(point1[:2]))
+    point2 = tuple(reversed(point2[:2]))
 
     if unit == Unit.meters:
         return geopy.distance.distance(point1, point2).meters
