@@ -28,6 +28,7 @@ def geojson_santiago_bernabeu():
         },
     }
 
+
 @pytest.fixture
 def geojson_santiago_bernabeu_w_alt():
     """
@@ -83,7 +84,7 @@ def test_length_sb(geojson_santiago_bernabeu):
     ) == pytest.approx(114.51, rel=1e-1)
 
 
-def test_length_sb(geojson_santiago_bernabeu_w_alt):
+def test_length_sb_w_alt(geojson_santiago_bernabeu_w_alt):
     assert calculate_distance(
         geojson_santiago_bernabeu_w_alt, unit=Unit.meters
     ) == pytest.approx(104.71, rel=1e-1)
