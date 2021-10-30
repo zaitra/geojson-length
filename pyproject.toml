@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "geojson-length"
-version = "v0.1.2"
+version = "v1.0.0"
 description = "Calculate the length of a GeoJSON LineString or MultiLineString"
 license = "MIT license"
 authors = ["Zaitra <info@zaitra.io>"]

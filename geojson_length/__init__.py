@@ -2,7 +2,7 @@
 
 __author__ = """Zaitra"""
 __email__ = "info@zaitra.io"
-__version__ = "v0.1.2"
+__version__ = "v1.0.0"
 
 from geojson_length.geojson_length import calculate_distance, Unit
 
