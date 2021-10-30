@@ -40,4 +40,4 @@ jobs:
         working-directory: .
         run: poetry install
       - name: Run test suite
-        run: pytest --color=yes --verbose --showlocals tests
+        run: poetry run pytest --color=yes --verbose --showlocals tests
