@@ -34,7 +34,10 @@ jobs:
           python-version: 3.8
       - name: Install pytest
         run: pip3 install pytest==5.4.3
-      - name: Install package
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.1.6
+      - name: Install project
+        working-directory: .
         run: poetry install
       - name: Run test suite
         run: pytest --color=yes --verbose --showlocals tests
