@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Optional
+from geojson_length.exc import GeojsonLengthException
 
 import geopy.distance
 
@@ -64,17 +65,40 @@ def calculate_line_string(
 
 def calculate_distance(geojson, unit: Unit = Unit.meters) -> Optional[float]:
     """
-    Calculate distance of LineString or MultiLineString GeoJSON
+    Calculate distance of LineString or MultiLineString GeoJSON.
+    Raises geojson_length.exc.GeojsonLengthException if input GeoJSON is invalid.
     :param geojson: GeoJSON feature of type LineString or MultiLineString
     :param unit: Unit of the result
     :return: distance in preferred units
     """
+    try:
+        geometry = geojson.get("geometry", None)
+    except AttributeError:
+        raise GeojsonLengthException(
+            "Invalid GeoJSON provided. Should be geojson.geometry.LineString,"
+            " geojson.geometry.MultiLineString or dict"
+        )
 
-    coordinates = geojson["geometry"]["coordinates"]
+    if not geometry:
+        raise GeojsonLengthException("Provided GeoJSON object has no geometry field")
 
-    if geojson["geometry"]["type"] == "LineString":
+    coordinates = geometry.get("coordinates", None)
+
+    if not coordinates:
+        raise GeojsonLengthException(
+            "Provided GeoJSON object has no coordinates specified in geometry field"
+        )
+
+    geometry_type = geometry.get("type", None)
+
+    if not geometry_type:
+        raise GeojsonLengthException(
+            "Provided GeoJSON object has no type specified in geometry field"
+        )
+
+    if geometry_type == "LineString":
         return calculate_line_string(coordinates, unit)
-    elif geojson["geometry"]["type"] == "MultiLineString":
+    elif geometry_type == "MultiLineString":
         distance = 0
         for line in coordinates:
             distance += calculate_line_string(line, unit)

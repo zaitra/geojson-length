@@ -5,6 +5,7 @@
 import pytest
 
 from geojson_length import calculate_distance, Unit
+from geojson_length.exc import GeojsonLengthException
 
 
 # *** LineString ***
@@ -150,3 +151,26 @@ def test_length_multiline(geojson_multilinestring):
     assert calculate_distance(
         geojson_multilinestring, unit=Unit.yards
     ) == pytest.approx(68900.47, rel=1e-1)
+
+
+def test_exceptions():
+
+    exception_msg = "Invalid GeoJSON provided. Should be geojson.geometry.LineString,"
+    " geojson.geometry.MultiLineString or dict"
+
+    with pytest.raises(GeojsonLengthException, match=exception_msg):
+        calculate_distance("wrong_geojson", exception_msg)
+
+    exception_msg = "Provided GeoJSON object has no geometry field"
+    with pytest.raises(GeojsonLengthException, match=exception_msg):
+        calculate_distance({}, exception_msg)
+
+    exception_msg = (
+        "Provided GeoJSON object has no coordinates specified in geometry field"
+    )
+    with pytest.raises(GeojsonLengthException, match=exception_msg):
+        calculate_distance({"geometry": {"type": "LineString"}}, exception_msg)
+
+    exception_msg = "Provided GeoJSON object has no type specified in geometry field"
+    with pytest.raises(GeojsonLengthException, match=exception_msg):
+        calculate_distance({"geometry": {"coordinates": [[]]}}, exception_msg)
