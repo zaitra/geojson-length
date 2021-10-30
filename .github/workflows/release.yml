@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  release-version:
+    name: Release a new version using semantic release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.export.outputs.version }}
+    steps:
+      - name: Checkout repository (full-depth)
+        uses: actions/checkout@v2
+        with: { fetch-depth: 0 }
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+      - name: Export released version
+        id: export
+        run: echo "::set-output name=version::$(git describe --tags --abbrev=0)"
