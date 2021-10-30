@@ -1,0 +1,2 @@
+class GeojsonLengthException(Exception):
+    pass
