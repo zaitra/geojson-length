@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "geojson-length"
+version = "v0.1.2"
+description = "Reserve and execute commands on EC2 Spot instance with ease"
+license = "MIT license"
+authors = ["Zaitra <info@zaitra.io>"]
+readme = "README.rst"
+include = ["geojson_length/**/*"]
+
+packages = [
+    { include = "geojson_length" },
+    { include = "geojson_length/*.py" },
+    { include = "geojson_length/**/*.py" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+geopy = "2.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+pre-commit = "2.15.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
