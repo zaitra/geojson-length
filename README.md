@@ -47,6 +47,15 @@ $ pip3 install geojson-length
     }
 ```
 
+## Run test suite
+
+1. `$ pip install pytest`
+2. `$ poetry run pytest --color=yes --verbose --showlocals tests`
+
+
+> You may need to run `poetry install` first.
+
+
 ## Credits
 -------
 
